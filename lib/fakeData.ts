@@ -1,0 +1,53 @@
+export const fakeRecipientData: Record<string, any> = {
+  '948723863S': {
+    lastName: 'STRICKLAND',
+    firstName: 'RACHEAL',
+    address1: '667 NEWPORT RD',
+    address2: '',
+    city: 'FAYETTEVILLE',
+    state: 'NC',
+    zip: '28314-0000',
+    gender: 'FEMALE',
+    dob: '9/21/1989',
+  },
+  '123456789': {
+    lastName: 'SMITH',
+    firstName: 'JOHN',
+    address1: '123 MAIN ST',
+    address2: '',
+    city: 'RALEIGH',
+    state: 'NC',
+    zip: '27601-0000',
+    gender: 'MALE',
+    dob: '5/15/1985',
+  },
+};
+
+export const fakeBillingProviderData: Record<string, any> = {
+  '1982362018': {
+    address: '4251 RAMSEY ST',
+    lastName: 'ALLES & ASSOCIATES NORTH CAROLINA',
+    firstName: '',
+    address1: '4251 RAMSEY ST',
+    address2: 'STE 889',
+    city: 'FAYETTEVILLE',
+    state: 'NC',
+    zip: '28311-2130',
+    taxonomyCode: '193200000X - Multi-Specialty',
+    phone: '9107160105',
+    fax: '9102928872',
+  },
+  '1234567890': {
+    address: '789 ELM AVE',
+    lastName: 'DENTAL CARE INC',
+    firstName: '',
+    address1: '789 ELM AVE',
+    address2: 'STE 100',
+    city: 'CHARLOTTE',
+    state: 'NC',
+    zip: '28202-0000',
+    taxonomyCode: '193200000X - Multi-Specialty',
+    phone: '7045551234',
+    fax: '7045555678',
+  },
+};
