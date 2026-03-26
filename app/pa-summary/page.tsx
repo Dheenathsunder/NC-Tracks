@@ -1,13 +1,13 @@
 'use client';
 
+import { Suspense, useMemo } from 'react';
 import Link from 'next/link';
-import { useMemo } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { NCTracksHeader } from '@/components/nc-tracks-header';
 import { Navigation } from '@/components/navigation';
 import { generatePriorAuthCode } from '@/lib/prior-auth-code';
 
-export default function PASummary() {
+function PASummaryContent() {
   const searchParams = useSearchParams();
   const priorAuthCode = useMemo(
     () => searchParams.get('code') || generatePriorAuthCode(),
@@ -99,5 +99,13 @@ export default function PASummary() {
         </div>
       </footer>
     </div>
+  );
+}
+
+export default function PASummary() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-gray-100" />}>
+      <PASummaryContent />
+    </Suspense>
   );
 }
