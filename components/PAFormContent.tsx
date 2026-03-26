@@ -9,8 +9,8 @@ export function PAFormContent() {
   const searchParams = useSearchParams();
   const [activeTab, setActiveTab] = useState('header');
   const [formData, setFormData] = useState({
-    payer: searchParams.get('payer') || 'DHB',
-    paType: searchParams.get('type') || 'DENTAL',
+    payer: searchParams.get('payer') || '',
+    paType: searchParams.get('type') || '',
     healthPlan: searchParams.get('plan') || '',
     // Recipient info
     recipientId: '',
@@ -24,7 +24,7 @@ export function PAFormContent() {
     recipientGender: '',
     recipientDOB: '',
     // Base info
-    accountInfo: 'long',
+    accountInfo: '',
     group: '',
     locatorCode: '',
     npiAtypicalId: '',
@@ -41,11 +41,11 @@ export function PAFormContent() {
       {
         id: 1,
         lineNum: 1,
-        procCode: 'D4341',
+        procCode: '',
         codeType: 'ADA CODE',
-        areaCavity: 'UL-QUAD',
-        tooth: '14',
-        requestDate: new Date().toISOString().slice(0, 10),
+        areaCavity: 'Choose',
+        tooth: 'Choose',
+        requestDate: '',
       },
     ],
     // Attachments

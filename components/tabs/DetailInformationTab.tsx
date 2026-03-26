@@ -13,11 +13,11 @@ interface DetailInformationTabProps {
 const defaultLineItems = () => [
   {
     lineNum: 1,
-    procCode: 'D4341',
+    procCode: '',
     codeType: 'ADA CODE',
-    areaOfCavity: 'UL-QUAD',
-    tooth: '14',
-    requestedBeginDate: '2026-03-03',
+    areaOfCavity: 'Choose',
+    tooth: '',
+    requestedBeginDate: '',
   },
 ];
 
@@ -38,7 +38,7 @@ export default function DetailInformationTab({
   const handleAddLineItem = () => {
     const newLineItem = {
       lineNum: lineItems.length + 1,
-      procCode: 'D4341',
+      procCode: '',
       codeType: 'ADA COD',
       areaOfCavity: 'Choose',
       tooth: '',
@@ -89,11 +89,11 @@ export default function DetailInformationTab({
       <div className="bg-gray-200 px-4 py-3 rounded flex justify-between border border-gray-400">
         <div>
           <span className="font-semibold">Payer:</span>
-          <span className="ml-2 font-bold">{formData.payer || 'DHB'}</span>
+          <span className="ml-2 font-bold">{formData.payer || ''}</span>
         </div>
         <div>
           <span className="font-semibold">PA Type:</span>
-          <span className="ml-2 font-bold">{formData.paType || 'DENTAL'}</span>
+          <span className="ml-2 font-bold">{formData.paType || ''}</span>
         </div>
       </div>
 
@@ -111,10 +111,11 @@ export default function DetailInformationTab({
                 Account Information:
               </label>
               <select
-                value={formData.accountInfo || 'Long'}
+                value={formData.accountInfo || ''}
                 onChange={(e) => setFormData({ ...formData, accountInfo: e.target.value })}
                 className="w-full border border-gray-400 rounded px-3 py-2 text-gray-700"
               >
+                <option value="">Choose</option>
                 <option value="Long">Long</option>
                 <option value="Short">Short</option>
               </select>

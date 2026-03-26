@@ -37,15 +37,19 @@ export default function SuccessPage({ data, onNewPA, onBackHome }: SuccessPagePr
             <div className="space-y-2 text-left">
               <div className="flex justify-between">
                 <span className="text-gray-600">Payer:</span>
-                <span className="font-semibold">{data.payer || 'DHB'}</span>
+                <span className="font-semibold">{data.payer || ''}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600">PA Type:</span>
-                <span className="font-semibold">{data.paType || 'DENTAL'}</span>
+                <span className="font-semibold">{data.paType || ''}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600">Health Plan:</span>
-                <span className="font-semibold">{data.healthPlan || 'NCXTX'}</span>
+                <span className="font-semibold">{data.healthPlan || ''}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-gray-600">Prior Auth Code:</span>
+                <span className="font-semibold">{data.priorAuthCode || ''}</span>
               </div>
               {data.recipientId && (
                 <div className="flex justify-between">

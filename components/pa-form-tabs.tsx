@@ -1,12 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import {
   validateRouteAttachments,
   validateRouteDetail,
   validateRouteHeader,
 } from '@/lib/pa-validation';
+import { generatePriorAuthCode } from '@/lib/prior-auth-code';
 import { HeaderInformationTab } from '@/components/tabs/header-information-tab';
 import { DetailInformationTab } from '@/components/tabs/detail-information-tab';
 import { AttachmentsTab } from '@/components/tabs/attachments-tab';
@@ -72,6 +73,23 @@ type TabId = 'header' | 'detail' | 'attachments';
 export function PAFormTabs({ activeTab, setActiveTab, formData, setFormData }: PAFormTabsProps) {
   const router = useRouter();
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
+
+  useEffect(() => {
+    if (!Object.keys(fieldErrors).length) return;
+    const fd = formData as unknown as Record<string, unknown>;
+    const refreshed =
+      activeTab === 'header'
+        ? validateRouteHeader(fd).errors
+        : activeTab === 'detail'
+          ? validateRouteDetail(fd).errors
+          : validateRouteAttachments(fd).errors;
+    const same =
+      Object.keys(refreshed).length === Object.keys(fieldErrors).length &&
+      Object.entries(refreshed).every(([k, v]) => fieldErrors[k] === v);
+    if (!same) {
+      setFieldErrors(refreshed);
+    }
+  }, [activeTab, formData, fieldErrors]);
 
   const tryGoToTab = (target: TabId) => {
     const order: Record<TabId, number> = { header: 0, detail: 1, attachments: 2 };
@@ -139,7 +157,8 @@ export function PAFormTabs({ activeTab, setActiveTab, formData, setFormData }: P
       return;
     }
     setFieldErrors({});
-    router.push('/pa-summary');
+    const priorAuthCode = generatePriorAuthCode();
+    router.push(`/pa-summary?code=${encodeURIComponent(priorAuthCode)}`);
   };
 
   const tabs = [
@@ -201,7 +220,18 @@ export function PAFormTabs({ activeTab, setActiveTab, formData, setFormData }: P
           />
         )}
 
-        <div className="flex justify-end mt-8 pt-6 border-t border-gray-300">
+        <div className="flex justify-between mt-8 pt-6 border-t border-gray-300">
+          <div>
+            {activeTab !== 'header' && (
+              <button
+                type="button"
+                onClick={() => tryGoToTab(activeTab === 'attachments' ? 'detail' : 'header')}
+                className="bg-gray-400 hover:bg-gray-500 text-white font-bold py-2 px-8 rounded cursor-pointer"
+              >
+                Back
+              </button>
+            )}
+          </div>
           {activeTab === 'header' && (
             <button
               type="button"

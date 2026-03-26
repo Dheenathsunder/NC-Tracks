@@ -56,7 +56,7 @@ export default function RecipientInfoSection({
                 value={recipientIdInput}
                 onChange={(e) => setRecipientIdInput(e.target.value)}
                 className="w-full border border-gray-400 rounded px-3 py-2"
-                placeholder="Enter Recipient ID"
+                placeholder=""
               />
             </div>
             <div className="flex items-end">

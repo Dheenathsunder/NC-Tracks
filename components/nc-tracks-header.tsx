@@ -33,7 +33,7 @@ export function NCTracksHeader() {
             <div className="mt-2 flex items-center gap-2">
               <input
                 type="text"
-                placeholder="Search..."
+                placeholder=""
                 className="px-3 py-1 rounded text-gray-800 text-sm w-32"
               />
               <button className="bg-white/20 hover:bg-white/30 p-1 rounded">

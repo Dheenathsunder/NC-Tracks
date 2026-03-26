@@ -234,7 +234,7 @@ export function DetailInformationTab({
                     type="text"
                     value={item.procCode}
                     onChange={(e) => handleLineItemChange(idx, 'procCode', e.target.value)}
-                    placeholder="D4341"
+                    placeholder=""
                     className={`w-full px-2 py-1 border rounded text-sm ${errClass(`line_${idx}_procCode`)}`}
                   />
                   {fieldErrors[`line_${idx}_procCode`] && (

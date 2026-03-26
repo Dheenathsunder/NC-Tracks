@@ -1,10 +1,19 @@
 'use client';
 
 import Link from 'next/link';
+import { useMemo } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { NCTracksHeader } from '@/components/nc-tracks-header';
 import { Navigation } from '@/components/navigation';
+import { generatePriorAuthCode } from '@/lib/prior-auth-code';
 
 export default function PASummary() {
+  const searchParams = useSearchParams();
+  const priorAuthCode = useMemo(
+    () => searchParams.get('code') || generatePriorAuthCode(),
+    [searchParams]
+  );
+
   return (
     <div className="min-h-screen bg-gray-100">
       <NCTracksHeader />
@@ -20,7 +29,7 @@ export default function PASummary() {
           <div className="bg-green-50 border border-green-300 rounded p-6 mb-8">
             <h2 className="text-xl font-bold text-green-900 mb-4">Submission Confirmation</h2>
             <p className="text-gray-700 mb-2">
-              <span className="font-semibold">Request ID:</span> PA-2026-001234
+              <span className="font-semibold">Prior Auth Code:</span> {priorAuthCode}
             </p>
             <p className="text-gray-700 mb-2">
               <span className="font-semibold">Submitted Date:</span> {new Date().toLocaleDateString()}

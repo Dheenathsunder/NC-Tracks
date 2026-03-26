@@ -97,11 +97,11 @@ export default function HeaderInformationTab({
       <div className="bg-gray-200 px-4 py-3 rounded flex justify-between border border-gray-400">
         <div>
           <span className="font-semibold">Payer:</span>
-          <span className="ml-2 font-bold">{formData.payer || 'DHB'}</span>
+          <span className="ml-2 font-bold">{formData.payer || ''}</span>
         </div>
         <div>
           <span className="font-semibold">PA Type:</span>
-          <span className="ml-2 font-bold">{formData.paType || 'DENTAL'}</span>
+          <span className="ml-2 font-bold">{formData.paType || ''}</span>
         </div>
       </div>
 
@@ -245,7 +245,7 @@ export default function HeaderInformationTab({
                   setBillingNpi(v);
                   setFormData({ ...formData, billingNpi: v });
                 }}
-                placeholder="1982362018"
+                placeholder=""
                 className={`border rounded px-3 py-2 w-full ${errClass('billingNpi')}`}
               />
               {fieldErrors.billingNpi && (

@@ -77,7 +77,7 @@ export default function BillingProviderSection({
                   type="text"
                   value={npiInput}
                   onChange={(e) => setNpiInput(e.target.value)}
-                  placeholder="1982362018"
+                  placeholder=""
                   className="w-full border border-gray-400 rounded px-3 py-2"
                 />
               </div>

@@ -84,9 +84,9 @@ export function AttachmentsTab({
   const handleAddAttachment = () => {
     const newAttachment: Attachment = {
       id: Date.now(),
-      type: 'BITEWING',
-      code: 'UPLOAD',
-      control: String(formData.attachments.length + 1),
+      type: '',
+      code: '',
+      control: '',
       supplement: '',
       file: undefined,
     };
@@ -187,105 +187,6 @@ export function AttachmentsTab({
                   </tr>
                 </thead>
                 <tbody>
-                  {/* Sample attachments if has attachments is true */}
-                  {formData.hasAttachments && formData.attachments.length === 0 && (
-                    <>
-                      <tr className="bg-gray-50 border-b border-gray-300">
-                        <td className="px-4 py-3">
-                          <span className="text-gray-500">📎</span>
-                        </td>
-                        <td className="px-4 py-3">
-                          <select className="px-3 py-2 border border-gray-400 rounded text-sm cursor-pointer">
-                            <option value="BITEWING">BITEWING</option>
-                            <option value="CHRT NOTES">CHRT NOTES</option>
-                            <option value="PANO">PANO</option>
-                          </select>
-                        </td>
-                        <td className="px-4 py-3">
-                          <select className="px-3 py-2 border border-gray-400 rounded text-sm cursor-pointer">
-                            <option value="UPLOAD">UPLOAD</option>
-                            <option value="EMAIL">EMAIL</option>
-                            <option value="FAX">FAX</option>
-                          </select>
-                        </td>
-                        <td className="px-4 py-3">
-                          <input
-                            type="text"
-                            placeholder="1"
-                            className="w-16 px-3 py-2 border border-gray-400 rounded text-sm"
-                          />
-                        </td>
-                        <td className="px-4 py-3">
-                          <button className="bg-gray-400 hover:bg-gray-500 text-white font-bold py-1 px-4 rounded text-xs cursor-pointer">
-                            Upload File
-                          </button>
-                        </td>
-                      </tr>
-                      <tr className="bg-gray-50 border-b border-gray-300">
-                        <td className="px-4 py-3">
-                          <span className="text-gray-500">📎</span>
-                        </td>
-                        <td className="px-4 py-3">
-                          <select className="px-3 py-2 border border-gray-400 rounded text-sm cursor-pointer">
-                            <option value="CHRT NOTES">CHRT NOTES</option>
-                            <option value="BITEWING">BITEWING</option>
-                            <option value="PANO">PANO</option>
-                          </select>
-                        </td>
-                        <td className="px-4 py-3">
-                          <select className="px-3 py-2 border border-gray-400 rounded text-sm cursor-pointer">
-                            <option value="UPLOAD">UPLOAD</option>
-                            <option value="EMAIL">EMAIL</option>
-                            <option value="FAX">FAX</option>
-                          </select>
-                        </td>
-                        <td className="px-4 py-3">
-                          <input
-                            type="text"
-                            placeholder="2"
-                            className="w-16 px-3 py-2 border border-gray-400 rounded text-sm"
-                          />
-                        </td>
-                        <td className="px-4 py-3">
-                          <button className="bg-gray-400 hover:bg-gray-500 text-white font-bold py-1 px-4 rounded text-xs cursor-pointer">
-                            Upload File
-                          </button>
-                        </td>
-                      </tr>
-                      <tr className="bg-gray-50 border-b border-gray-300">
-                        <td className="px-4 py-3">
-                          <span className="text-gray-500">📎</span>
-                        </td>
-                        <td className="px-4 py-3">
-                          <select className="px-3 py-2 border border-gray-400 rounded text-sm cursor-pointer">
-                            <option value="PANO">PANO</option>
-                            <option value="BITEWING">BITEWING</option>
-                            <option value="CHRT NOTES">CHRT NOTES</option>
-                          </select>
-                        </td>
-                        <td className="px-4 py-3">
-                          <select className="px-3 py-2 border border-gray-400 rounded text-sm cursor-pointer">
-                            <option value="UPLOAD">UPLOAD</option>
-                            <option value="EMAIL">EMAIL</option>
-                            <option value="FAX">FAX</option>
-                          </select>
-                        </td>
-                        <td className="px-4 py-3">
-                          <input
-                            type="text"
-                            placeholder="3"
-                            className="w-16 px-3 py-2 border border-gray-400 rounded text-sm"
-                          />
-                        </td>
-                        <td className="px-4 py-3">
-                          <button className="bg-gray-400 hover:bg-gray-500 text-white font-bold py-1 px-4 rounded text-xs cursor-pointer">
-                            Upload File
-                          </button>
-                        </td>
-                      </tr>
-                    </>
-                  )}
-
                   {formData.attachments.map((attachment, idx) => (
                     <tr key={attachment.id} className="bg-gray-50 border-b border-gray-300">
                       <td className="px-4 py-3">

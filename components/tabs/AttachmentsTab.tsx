@@ -10,36 +10,22 @@ interface AttachmentsTabProps {
   fieldErrors?: Record<string, string>;
 }
 
+interface AttachmentRow {
+  id: number;
+  type: string;
+  transmissionCode: string;
+  controlNumber: string;
+  supplement: string;
+}
+
 export default function AttachmentsTab({
   formData,
   setFormData,
   attachmentDraftRef,
   fieldErrors = {},
 }: AttachmentsTabProps) {
-  const [hasAttachments, setHasAttachments] = useState(true);
-  const [attachments, setAttachments] = useState([
-    {
-      id: 1,
-      type: 'BITEWING',
-      transmissionCode: 'UPLOAD',
-      controlNumber: '1',
-      supplement: 'BW and PA.pdf',
-    },
-    {
-      id: 2,
-      type: 'CHRT NOTES',
-      transmissionCode: 'UPLOAD',
-      controlNumber: '2',
-      supplement: 'CHART NOTES AND PERIO CHART.pdf',
-    },
-    {
-      id: 3,
-      type: 'PANO',
-      transmissionCode: 'UPLOAD',
-      controlNumber: '3',
-      supplement: 'Pano.pdf',
-    },
-  ]);
+  const [hasAttachments, setHasAttachments] = useState(false);
+  const [attachments, setAttachments] = useState<AttachmentRow[]>([]);
 
   const attachmentTypes = ['BITEWING', 'CHRT NOTES', 'PANO', 'X-RAY', 'CLINICAL PHOTO'];
 
@@ -47,8 +33,8 @@ export default function AttachmentsTab({
     const newAttachment = {
       id: attachments.length + 1,
       type: '',
-      transmissionCode: 'UPLOAD',
-      controlNumber: (attachments.length + 1).toString(),
+      transmissionCode: '',
+      controlNumber: '',
       supplement: '',
     };
     setAttachments([...attachments, newAttachment]);
@@ -102,11 +88,11 @@ export default function AttachmentsTab({
       <div className="bg-gray-200 px-4 py-3 rounded flex justify-between border border-gray-400">
         <div>
           <span className="font-semibold">Payer:</span>
-          <span className="ml-2 font-bold">{formData.payer || 'DHB'}</span>
+          <span className="ml-2 font-bold">{formData.payer || ''}</span>
         </div>
         <div>
           <span className="font-semibold">PA Type:</span>
-          <span className="ml-2 font-bold">{formData.paType || 'DENTAL'}</span>
+          <span className="ml-2 font-bold">{formData.paType || ''}</span>
         </div>
       </div>
 
@@ -231,6 +217,7 @@ export default function AttachmentsTab({
                             }
                             className={`w-full border rounded px-2 py-1 text-sm bg-white ${attErrClass(`attachment_${index}_tx`)}`}
                           >
+                            <option value="">Choose</option>
                             <option value="UPLOAD">UPLOAD</option>
                             <option value="OTHER">OTHER</option>
                           </select>

@@ -151,7 +151,7 @@ export function HeaderInformationTab({
                   setRecipientIdInput(v);
                   setFormData({ ...formData, recipientId: v });
                 }}
-                placeholder="Enter Recipient ID"
+                placeholder=""
                 className={`w-full px-3 py-2 border rounded text-gray-700 ${errClass('recipient')}`}
               />
               {fieldErrors.recipient && (

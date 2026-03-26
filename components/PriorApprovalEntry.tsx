@@ -8,7 +8,7 @@ interface PriorApprovalEntryProps {
 }
 
 export default function PriorApprovalEntry({ onSelectPayer }: PriorApprovalEntryProps) {
-  const [payer, setPayer] = useState('DHB');
+  const [payer, setPayer] = useState('');
   const [healthPlan, setHealthPlan] = useState('');
   const [paType, setPAType] = useState('');
 

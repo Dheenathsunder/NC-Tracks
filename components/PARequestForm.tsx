@@ -1,12 +1,13 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { AttachmentDraft } from '@/lib/pa-validation';
 import {
   validateSpaAttachments,
   validateSpaDetail,
   validateSpaHeader,
 } from '@/lib/pa-validation';
+import { generatePriorAuthCode } from '@/lib/prior-auth-code';
 import Header from './Header';
 import HeaderInformationTab from './tabs/HeaderInformationTab';
 import DetailInformationTab from './tabs/DetailInformationTab';
@@ -29,6 +30,30 @@ export default function PARequestForm({ initialData, onSubmit }: PARequestFormPr
   });
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const attachmentDraftRef = useRef<AttachmentDraft | null>(null);
+
+  const validateForTab = (tab: TabId) => {
+    if (tab === 'header') {
+      return validateSpaHeader(formData as Record<string, unknown>).errors;
+    }
+    if (tab === 'detail') {
+      return validateSpaDetail(formData as Record<string, unknown>).errors;
+    }
+    return validateSpaAttachments(
+      formData as Record<string, unknown>,
+      attachmentDraftRef.current
+    ).errors;
+  };
+
+  useEffect(() => {
+    if (!Object.keys(fieldErrors).length) return;
+    const refreshed = validateForTab(activeTab);
+    const same =
+      Object.keys(refreshed).length === Object.keys(fieldErrors).length &&
+      Object.entries(refreshed).every(([k, v]) => fieldErrors[k] === v);
+    if (!same) {
+      setFieldErrors(refreshed);
+    }
+  }, [formData, activeTab, fieldErrors]);
 
   const tryGoToTab = (target: TabId) => {
     const order: Record<TabId, number> = { header: 0, detail: 1, attachments: 2 };
@@ -97,7 +122,10 @@ export default function PARequestForm({ initialData, onSubmit }: PARequestFormPr
       return;
     }
     setFieldErrors({});
-    onSubmit(formData);
+    onSubmit({
+      ...formData,
+      priorAuthCode: generatePriorAuthCode(),
+    });
   };
 
   return (
@@ -182,7 +210,18 @@ export default function PARequestForm({ initialData, onSubmit }: PARequestFormPr
             )}
           </div>
 
-          <div className="flex justify-end">
+          <div className="flex justify-between">
+            <div>
+              {activeTab !== 'header' && (
+                <button
+                  type="button"
+                  onClick={() => tryGoToTab(activeTab === 'attachments' ? 'detail' : 'header')}
+                  className="bg-gray-300 hover:bg-gray-400 text-gray-800 px-8 py-2 rounded font-semibold transition"
+                >
+                  Back
+                </button>
+              )}
+            </div>
             {activeTab === 'header' && (
               <button
                 type="button"
